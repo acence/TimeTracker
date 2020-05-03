@@ -11,6 +11,7 @@ namespace TimeTracker.Infrastructure.Database
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
+            this.ChangeTracker.LazyLoadingEnabled = false;
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
