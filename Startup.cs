@@ -23,7 +23,14 @@ namespace TimeTracker
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddMvc(option => option.EnableEndpointRouting = false); 
+            
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Database")));
@@ -37,6 +44,8 @@ namespace TimeTracker
                 app.UseDeveloperExceptionPage();
             }
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
