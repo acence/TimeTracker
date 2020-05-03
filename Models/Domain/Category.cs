@@ -13,5 +13,7 @@ namespace TimeTracker.Models.Domain
         public String Name { get; set; }
         public Int32 TextColor { get; set; }
         public Int32 BackgroundColor { get; set; }
+
+        public virtual ICollection<Entry> Entries { get; set; }
     }
 }

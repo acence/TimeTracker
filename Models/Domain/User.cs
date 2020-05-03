@@ -13,9 +13,11 @@ namespace TimeTracker.Models.Domain
         public String Username { get; set; }
         [Required]
         public String Password { get; set; }
-        [Required]
+        [Required, MaxLength(200)]
         public String FirstName { get; set; }
-        [Required]
+        [Required, MaxLength(200)]
         public String LastName { get; set; }
+
+        public virtual ICollection<Entry> Entries { get; set; }
     }
 }

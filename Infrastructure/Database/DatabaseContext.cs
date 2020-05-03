@@ -15,6 +15,7 @@ namespace TimeTracker.Infrastructure.Database
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasDefaultSchema("time");
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<User> Users { get; set; }

@@ -36,9 +36,10 @@ namespace TimeTracker.Controllers
             if(user != null)
             {
                 HttpContext.Session.SetObject(Constants.Session.UserKey, user);
-                if (Request.Query[Constants.QueryString.ReturnUrl][0] != null)
+                var returnUrl = Request.Query[Constants.QueryString.ReturnUrl].FirstOrDefault();
+                if (returnUrl != null)
                 {
-                    return new RedirectResult(Request.Query[Constants.QueryString.ReturnUrl][0]);
+                    return new RedirectResult(returnUrl);
                 }
                 return new RedirectResult("/App");
             }

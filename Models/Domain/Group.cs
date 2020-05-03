@@ -9,7 +9,7 @@ namespace TimeTracker.Models.Domain
 {
     public class Group : BaseDomainModel
     {
-        [Required]
+        [Required, MaxLength(200)]
         public String Name { get; set; }
     }
 }
