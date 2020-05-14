@@ -1,9 +1,10 @@
-﻿/// <binding BeforeBuild='build:css-sass-public' ProjectOpened='watch' />
+﻿/// <binding BeforeBuild='build:css-sass' AfterBuild='lint:js' />
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var rename = require('gulp-rename');
+var eslint = require('gulp-eslint');
 
-gulp.task('build:css-sass-public', () => {
+gulp.task('build:css-sass', () => {
     return gulp.src(['./Styles/*.scss'])
         .pipe(sass().on('error', sass.logError))
         .pipe(rename((path) => {
@@ -12,6 +13,9 @@ gulp.task('build:css-sass-public', () => {
         .pipe(gulp.dest('./wwwroot/css'));
 });
 
-gulp.task('watch', function () {
-    gulp.watch(['./Content/**/*.scss'], gulp.series('build:css-sass-public'));
-}); 
+gulp.task('lint:js', () => {
+    return gulp.src(['Scripts/**/*.jsx'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+});
